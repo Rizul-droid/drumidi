@@ -39,6 +39,7 @@
           clef: "percussion",
           keys: [map.key],
           duration: vfDuration,
+          noteType: map.noteType, // ensure cross and regular noteheads render correctly
         }).addArticulation(0, map.noteType === "x"
           ? new VF.Articulation("a>").setPosition(3)
           : new VF.Articulation("a.").setPosition(3));
