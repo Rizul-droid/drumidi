@@ -34,10 +34,11 @@
 
       const notes = scoreJson.measures[0].map(note => {
         const map = drumMap[note.instrument];
+        const vfDuration = note.duration.replace('n', ''); // convert from Tone.js style e.g. "8n" to VexFlow's "8"
         return new VF.StaveNote({
           clef: "percussion",
           keys: [map.key],
-          duration: note.duration,
+          duration: vfDuration,
         }).addArticulation(0, map.noteType === "x"
           ? new VF.Articulation("a>").setPosition(3)
           : new VF.Articulation("a.").setPosition(3));
