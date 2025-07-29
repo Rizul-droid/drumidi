@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Drum Notation</title>
+    <script src="https://unpkg.com/vexflow/releases/vexflow-min.js"></script>
+    <style>
+        body { margin: 0; }
+        #notation { padding: 16px; }
+    </style>
+</head>
+<body>
+<div id="notation"></div>
+<script>
+    function renderScore(scoreJson) {
+      const VF = Vex.Flow;
+      const div = document.getElementById("notation");
+      div.innerHTML = "";  // clear previous
+
+      const renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+      renderer.resize(800, 200);
+      const context = renderer.getContext();
+      context.setFont("Arial", 10, "").setBackgroundFillStyle("#fff");
+
+      const stave = new VF.Stave(10, 40, 750);
+      stave.addClef("percussion").addTimeSignature(scoreJson.time_signature);
+      stave.setContext(context).draw();
+
+      const drumMap = {
+        hh: { key: "g/5", noteType: "x" },
+        sd: { key: "c/5", noteType: "n" },
+        bd: { key: "f/4", noteType: "n" }
+      };
+
+      const notes = scoreJson.measures[0].map(note => {
+        const map = drumMap[note.instrument];
+        return new VF.StaveNote({
+          clef: "percussion",
+          keys: [map.key],
+          duration: note.duration,
+        }).addArticulation(0, map.noteType === "x"
+          ? new VF.Articulation("a>").setPosition(3)
+          : new VF.Articulation("a.").setPosition(3));
+      });
+
+      const voice = new VF.Voice({
+        num_beats: 4,
+        beat_value: 4,
+        resolution: VF.RESOLUTION
+      }).addTickables(notes);
+
+      new VF.Formatter().joinVoices([voice]).format([voice], 700);
+      voice.draw(context, stave);
+    }
+</script>
+</body>
+</html>

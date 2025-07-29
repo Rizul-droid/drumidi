@@ -1,0 +1,17 @@
+{
+  "title": "Back in Black",
+  "time_signature": "4/4",
+  "bpm": 92,
+  "measures": [
+    [
+      { "instrument": "hh", "duration": "8n" },
+      { "instrument": "sd", "duration": "8n" },
+      { "instrument": "hh", "duration": "8n" },
+      { "instrument": "sd", "duration": "8n" },
+      { "instrument": "hh", "duration": "8n" },
+      { "instrument": "sd", "duration": "8n" },
+      { "instrument": "hh", "duration": "8n" },
+      { "instrument": "sd", "duration": "8n" }
+    ]
+  ]
+}
