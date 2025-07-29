@@ -54,6 +54,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/html/drum_notation.html
+    - assets/html/cjs/vexflow.js
     - assets/scores/back_in_black_v2.json
 
 

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Drum Notation</title>
-    <script src="https://unpkg.com/vexflow/releases/vexflow-min.js"></script>
+    <script src="cjs/vexflow.js"></script>
     <style>
-        body { margin: 0; }
+        body { margin: 0; background: #000; color: #fff; }
         #notation { padding: 16px; }
     </style>
 </head>
@@ -20,7 +20,10 @@
       const renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
       renderer.resize(800, 200);
       const context = renderer.getContext();
-      context.setFont("Arial", 10, "").setBackgroundFillStyle("#fff");
+      context.setFont("Arial", 10, "")
+             .setBackgroundFillStyle("#000")
+             .setFillStyle("#fff")
+             .setStrokeStyle("#fff");
 
       const stave = new VF.Stave(10, 40, 750);
       stave.addClef("percussion").addTimeSignature(scoreJson.time_signature);
