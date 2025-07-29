@@ -29,9 +29,11 @@ class _DrumScoreViewState extends State<DrumScoreView> {
 
 
   Future<void> _sendScore() async {
-    final jsonString = await rootBundle.loadString('assets/scores/back_in_black_v2.json');
-    final jsCommand = "renderScore(${jsonString.replaceAll("\n", "")});";
-    _controller.runJavaScript(jsCommand);
+    final jsonMap = jsonDecode(
+      await rootBundle.loadString('assets/scores/back_in_black_v2.json'),
+    );
+    final jsCommand = 'renderScore(${jsonEncode(jsonMap)});';
+    await _controller.runJavaScript(jsCommand);
   }
 
   @override
